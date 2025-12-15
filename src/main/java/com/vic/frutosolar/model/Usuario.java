@@ -1,9 +1,16 @@
-// src/main/java/com/vic/frutosolar/model/Usuario.java
 package com.vic.frutosolar.model;
 
-import jakarta.persistence.*;
-import lombok.Data;
 import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Data
@@ -19,7 +26,17 @@ public class Usuario {
     @Column(nullable = false)
     private String password;
 
-    // ROLES: "ADMIN", "VENDEDOR", "CLIENTE"
+    // --- CAMPOS NUEVOS NECESARIOS ---
+    // Al agregar estas variables, @Data crea setNombre() y setCorreo()
+    private String nombre;
+    private String correo;
+    
+    // Agregamos estos también para evitar errores futuros en el Frontend
+    private String telefono;
+    private String direccion;
+    // --------------------------------
+
+    // ROLES: "ROLE_ADMIN", "ROLE_VENDEDOR", "ROLE_CLIENTE"
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<String> roles;
 }
